@@ -1,18 +1,14 @@
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+
 
 public class User {
 
     private String name;
     private String email;
     private String address;
-    // private Set<Necessity> currentInventory = new HashSet<>();
-    private HashMap currentInventory = new HashMap();
-    // private Map<String, Integer> shoppingCart;
-    private HashMap shoppingCart = new HashMap();
+    private HashMap currentInventory;
+    private HashMap shoppingCart;
 
     public User(String name, String email, String address, HashMap currentInventory, HashMap shoppingCart) {
         this.name = name;
@@ -26,7 +22,7 @@ public class User {
         return currentInventory;
     }
 
-    public void getCurrentShoppingCart() {
-        System.out.println("You currently have: "+shoppingCart);
+    public String getCurrentShoppingCart() {
+        return "You currently have: "+shoppingCart;
     }
 }

@@ -4,19 +4,29 @@ import java.util.Scanner;
 public class testing {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in); // System.in means it takes input from the keyboard
-        System.out.println("Input the first item with quantity in digit (like Apple 3):");
-        String s1 = input.nextLine(); // reads a line of input. returns the line as a string
-        System.out.println("Input the second item with quantity in digit (like Apple 3):");
-        String s2 = input.nextLine();
-        System.out.println("Item 1:" + s1 + " " + s2);
-
         HashMap currentInventory = new HashMap();
         HashMap currentShoppingCart = new HashMap();
-        User Jenny = new User("Jenny", "yenny@yahoo.com",  "317 Island Lane", currentInventory, currentShoppingCart);
+
+        Scanner input = new Scanner(System.in);
+        String s1 = "";
+        String s2 = "";
+        int counter = 0;
+        while (!s1.equals("done")) {
+            counter++;
+            System.out.println("Input item " + counter + " here as item please. Type the word 'done' if you are finished.");
+            s1 = input.nextLine();
+            System.out.println("Please input the amount of that item you want in digits please. If you are done, please hit Enter.");
+            s2 = input.nextLine();
+            if (s1.equals("done") || s1.equals("Done")) {
+            } else {
+                currentShoppingCart.put(s1, s2);
+            }
+        }
+
+            User Jenny = new User("Jenny", "yenny@yahoo.com", "317 Island Lane", currentInventory, currentShoppingCart);
 
 
-        Jenny.getCurrentShoppingCart();
+        System.out.println("Looks like you have " + counter +  " items in your cart! " + Jenny.getCurrentShoppingCart());
 
     }
 }
