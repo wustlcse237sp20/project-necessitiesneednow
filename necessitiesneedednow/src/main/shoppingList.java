@@ -55,11 +55,6 @@ public class shoppingList {
 
     }
 
-    public void listItems() {
-        for (String e : items) {
-            System.out.println(getItemToStore());
-
-        }
-    }
+   
 
 }
