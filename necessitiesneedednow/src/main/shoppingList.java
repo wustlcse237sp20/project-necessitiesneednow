@@ -1,14 +1,24 @@
-import java.util.HashMap;
 import java.util.ArrayList;
-public class shoppingCart {
+import java.util.HashMap;
 
+public class shoppingList {
     HashMap<String, Integer> totalAmountOfItem;
     HashMap<String, String> itemToStore;
     HashMap<String, Double> pricePerTime;
     HashMap<String, Boolean> subscriptions;
     ArrayList<String> items;
-    int capacity;
-    int currentSize;
+    String date;
+
+
+    public shoppingList(String date) {
+        this.date = date;
+        this.totalAmountOfItem = new HashMap<>();
+        this.itemToStore = new HashMap<>();
+        this.pricePerTime = new HashMap<>();
+        this.subscriptions = new HashMap<>();
+        this.items = new ArrayList<>();
+
+    }
 
 
     public HashMap<String, Integer> getTotalAmountOfItem() {
@@ -27,37 +37,29 @@ public class shoppingCart {
         return subscriptions;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public int getCurrentSize() {
-        return currentSize;
-    }
-
     public ArrayList<String> getItems() {
         return items;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public String getDate() {
+        return date;
     }
 
-    public void addItem(String item, int totalAmount, String store,  double price, boolean subscribed){
+    public void addItem(String item, int totalAmount, String store, double price, boolean subscribed) {
         this.totalAmountOfItem.put(item, totalAmount);
         this.itemToStore.put(item, store);
         this.pricePerTime.put(item, price);
         this.subscriptions.put(item, subscribed);
-        this.currentSize += 1;
+        this.items.add(item);
+
+
     }
 
-    public void createEmptyCart(){
-        this.totalAmountOfItem = new HashMap<>(this.capacity);
-        this.itemToStore = new HashMap<>(this.capacity);
-        this.pricePerTime = new HashMap<>(this.capacity);
-        this.subscriptions = new HashMap<>(this.capacity);
-        this.items = new ArrayList<>(capacity);
-        this.capacity = 0;
-        this.currentSize = 0;
+    public void listItems() {
+        for (String e : items) {
+            System.out.println(getItemToStore());
+
+        }
     }
+
 }
