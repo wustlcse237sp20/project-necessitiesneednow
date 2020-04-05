@@ -8,6 +8,8 @@ public class shoppingList {
     HashMap<String, Boolean> subscriptions;
     ArrayList<String> items;
     String date;
+    String item;
+    int numberOfItemsToRemove;
 
 
     public shoppingList(String date) {
@@ -54,7 +56,37 @@ public class shoppingList {
 
 
     }
+    public void removeItem(String item){
+        this.item = item;
+        if(this.items.contains(item)){
+            this.totalAmountOfItem.remove(item);
+            this.itemToStore.remove(item);
+            this.pricePerTime.remove(item);
+            this.subscriptions.remove(item);
+            this.items.remove(item);
+            System.out.println("Item removed successfully.");
+        }
+        else{
+            System.out.println("Looks like that item didn't exist in the cart. Did you mis-spell it, perhaps?");
+            System.out.println();
+        }
+    }
 
-   
+    public void removePartialItem(String item, int numberOfItemsToRemove){
+        this.item = item;
+        this.numberOfItemsToRemove = numberOfItemsToRemove;
+        if(this.items.contains(item)){
+            int oldAmountOfItem = this.totalAmountOfItem.get(item);
+            int newAmountOfItem = oldAmountOfItem - numberOfItemsToRemove;
+            if(newAmountOfItem < 0){
+                newAmountOfItem = 0;
+            }
+            this.totalAmountOfItem.replace(item,newAmountOfItem);
+
+        }
+    }
+
+
+
 
 }
