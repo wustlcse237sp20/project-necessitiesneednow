@@ -86,6 +86,15 @@ public class shoppingList {
 
         }
     }
+    public double totalCost(){
+        double price = 0.0;
+        for (String item: totalAmountOfItem.keySet()) {
+            int amountOfItem = totalAmountOfItem.get(item);
+            double priceOfItem = pricePerTime.get(item);
+            price += amountOfItem*priceOfItem;
+        }
+        return price;
+    }
 
 
 

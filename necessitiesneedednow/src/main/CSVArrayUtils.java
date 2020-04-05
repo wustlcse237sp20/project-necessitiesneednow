@@ -30,6 +30,8 @@ public class CSVArrayUtils {
         return result;
     }
 
+
+
     public Double[] pricesToDoubleArray(Collection<Double> prices){
         int index = 0;
         Double[] result = new Double[prices.size()];
