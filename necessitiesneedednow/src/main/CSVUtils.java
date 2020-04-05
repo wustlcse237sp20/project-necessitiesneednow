@@ -17,7 +17,7 @@ public class CSVUtils {
     }
 
 
-    private ArrayList<String[]> shoppingCartToStringArray(shoppingCart cart){
+    private ArrayList<String[]> shoppingCartToStringArray(shoppingList cart){
         CSVArrayUtils util = new CSVArrayUtils();
         int size = cart.totalAmountOfItem.keySet().size();
         ArrayList<String[]> rows = new ArrayList<String[]>(size);
@@ -39,7 +39,7 @@ public class CSVUtils {
     }
 
 
-    public Boolean createCSV(shoppingCart cart) {
+    public Boolean createCSV(shoppingList cart) {
         File csv = new File(filePath);
         ArrayList<String[]> rows = shoppingCartToStringArray(cart);
         try (PrintWriter writer = new PrintWriter(csv)) {
