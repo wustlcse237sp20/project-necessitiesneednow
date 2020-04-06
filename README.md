@@ -48,20 +48,6 @@ We have incorporated the following user stories as of Iteration One (4/6/20):
 
   
 
-```
-
-NOTE FOR WHOEVER CONTINUES TYPING HERE: as of 4:15ish, the following user stories (from the "in-progress tab on github)
-
-that I have not put in this finished category due to me not knowing if it's 100% yet are:
-
-* As a user, I want to have a UI that is easy to use.
-
-* As a user, I will be able to use a categorization system for items for ease of finding what I want.
-
-* As a user, I want my information and preferences saved/loaded as CSV files in a file management system.
-
-```
-
   
 
 We have a few user stories that we plan to incorporate into the project in the near future:
@@ -74,6 +60,8 @@ to get this information. We do have an API in mind at this point in time.
 
 * As a user, I can see what items are in my shopping cart, along with a little blurb that describes them.
 
+* As a user, I want to have a UI that is easy to use.
+
 * Again, not having the API plays into why we don't have this user story incorporated quite yet. We plan to use this
 
 feature to give the customer a better idea of what they're purchasing: for example, using existing product descriptions
@@ -81,17 +69,11 @@ feature to give the customer a better idea of what they're purchasing: for examp
 that are taken from the API so that the user can make better, more informed decisions depending on their preferences.
 
   
+## Next Iteration
 
-```
+* As a user, I will be able to use a categorization system for items for ease of finding what I want.
 
-Another note! The piazza post does mentions if we have any user stories we intend to complete by next iteration, and
+* As a user, I want my information and preferences saved/loaded as CSV files in a file management system.
 
-any user stories that we've implemented that doesn't work. It also asks for what commands are required to compile and
+* As a user, There should a way to access items from multiple retailors that match my needs.
 
-run the code from the command line.
-
-  
-
-Maybe put at the end what we plan to have the scope of our project be? idk lol
-
-```
