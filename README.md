@@ -71,6 +71,9 @@ that are taken from the API so that the user can make better, more informed deci
   
 ## Next Iteration
 
+For our next iteration of NecessitiesNeededNow we hope to have the following user stories completed.
+
+
 * As a user, I will be able to use a categorization system for items for ease of finding what I want.
 
 * As a user, I want my information and preferences saved/loaded as CSV files in a file management system.
