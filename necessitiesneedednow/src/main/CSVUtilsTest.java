@@ -1,10 +1,8 @@
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class CSVUtilsTest {
 
@@ -16,14 +14,14 @@ class CSVUtilsTest {
     void setFilePath() {
         csvUtils.setFilePath("C:\\Users\\Shane Warga\\Desktop");
         String expected = "C:\\Users\\Shane Warga\\Desktop";
-        Assert.assertEquals(expected,csvUtils.getFilePath());
+        Assertions.assertEquals(expected,csvUtils.getFilePath());
     }
 
     @Test
     void setFileName(){
         csvUtils.setFileName("date.csv");
         String expected = "date.csv";
-        Assert.assertEquals(expected,csvUtils.getFileName());
+        Assertions.assertEquals(expected,csvUtils.getFileName());
     }
 
     @Test
@@ -36,7 +34,7 @@ class CSVUtilsTest {
         boolean bool = true;
         String[] item = {"Apple",Integer.toString(three),"Apple Store",Double.toString(price), Boolean.toString(bool)};
         expected.add(item);
-        Assert.assertEquals(expected.get(0), result.get(0));
+        Assertions.assertEquals(expected.get(0), result.get(0));
     }
 
     @Test
@@ -54,6 +52,6 @@ class CSVUtilsTest {
         csvUtils.setFileName("date.csv");
         listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
         boolean returned = csvUtils.createCSV(listForTesting);
-        Assert.assertEquals(true, returned);
+        Assertions.assertEquals(true, returned);
     }
 }

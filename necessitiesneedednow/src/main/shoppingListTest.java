@@ -1,4 +1,4 @@
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ class shoppingListTest {
         HashMap<String, Integer> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple",3);
         expectedHashMap.put("Pears",5);
-        Assert.assertEquals(expectedHashMap,actualHashMap);
+        Assertions.assertEquals(expectedHashMap,actualHashMap);
     }
 
     @Test
@@ -27,7 +27,7 @@ class shoppingListTest {
         HashMap<String, String> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple","Apple Store");
         expectedHashMap.put("Pears", "Kroger");
-        Assert.assertEquals(expectedHashMap,actualHashMap);
+        Assertions.assertEquals(expectedHashMap,actualHashMap);
     }
 
     @Test
@@ -38,7 +38,7 @@ class shoppingListTest {
         HashMap<String, Double> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple", 1000.00);
         expectedHashMap.put("Pears", 30.00);
-        Assert.assertEquals(expectedHashMap,actualHashMap);
+        Assertions.assertEquals(expectedHashMap,actualHashMap);
     }
 
     @Test
@@ -49,7 +49,7 @@ class shoppingListTest {
         HashMap<String, Boolean> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple", true);
         expectedHashMap.put("Pears", false);
-        Assert.assertEquals(expectedHashMap,actualHashMap);
+        Assertions.assertEquals(expectedHashMap,actualHashMap);
     }
 
     @Test
@@ -60,7 +60,7 @@ class shoppingListTest {
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("Apple");
         expectedArrayList.add("Pears");
-        Assert.assertEquals(expectedArrayList,actualArrayList);
+        Assertions.assertEquals(expectedArrayList,actualArrayList);
     }
 
     @Test
@@ -69,7 +69,7 @@ class shoppingListTest {
            ArrayList<String> actualArrayList = listForTesting.getItems();
            ArrayList<String> expectedArrayList = new ArrayList<>();
            expectedArrayList.add("Fidget Spinner");
-           Assert.assertEquals(expectedArrayList,actualArrayList);
+           Assertions.assertEquals(expectedArrayList,actualArrayList);
         }
 
 
@@ -81,7 +81,7 @@ class shoppingListTest {
         ArrayList<String> actualArrayList = listForTesting.getItems();
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("Pears");
-        Assert.assertEquals(expectedArrayList,actualArrayList);
+        Assertions.assertEquals(expectedArrayList,actualArrayList);
     }
 
     @Test
@@ -93,7 +93,7 @@ class shoppingListTest {
         HashMap<String, Integer> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple", 3);
         expectedHashMap.put("Pears", 1);
-        Assert.assertEquals(expectedHashMap,actualHashMap);
+        Assertions.assertEquals(expectedHashMap,actualHashMap);
     }
 
 
@@ -103,6 +103,6 @@ class shoppingListTest {
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         double actualTotalCost = listForTesting.totalCost();
         double expectedTotalCost = (3*1000.00) + (5*30.00);
-        Assert.assertEquals(expectedTotalCost,actualTotalCost, 0.0000);
+        Assertions.assertEquals(expectedTotalCost,actualTotalCost, 0.0000);
     }
 }
