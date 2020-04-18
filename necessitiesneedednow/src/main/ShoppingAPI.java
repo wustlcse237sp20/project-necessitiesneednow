@@ -1,16 +1,12 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-//
-//import org.json.JSONArray;
-//import org.json.JSONObject;
 
 public class ShoppingAPI {
 
@@ -29,7 +25,7 @@ public class ShoppingAPI {
 			// Request Setup
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(5000);
-			connection.setReadTimeout(5000);; 
+			connection.setReadTimeout(5000);;
 			
 			int status = connection.getResponseCode();
 						
@@ -47,7 +43,7 @@ public class ShoppingAPI {
 				reader.close();
 			}
 
-//			parse(responseContent.toString());
+			parse(responseContent.toString());
 			System.out.println(responseContent.toString());
 
 			
@@ -62,15 +58,15 @@ public class ShoppingAPI {
 	}
 	
 	
-//	public static String parse(String responseBody) {
-//		JSONArray albums = new JSONArray(responseBody);
-//		for(int i = 0; i < albums.length(); i++) {
-//			JSONObject album = albums.getJSONObject(i);
-//			String name = album.getString("name");
-//			int id = album.getInt("id");
-//			System.out.println(id + "   " + name);
-//		}
-//		return null;
-//		
-//	}
+	public static String parse(String responseBody) {
+		JSONArray albums = new JSONArray(responseBody);
+		for(int i = 0; i < albums.length(); i++) {
+			JSONObject album = albums.getJSONObject(i);
+			String name = album.getString("name");
+			//int id = album.getInt("id");
+			System.out.println( "   " + name);
+		}
+		return null;
+
+	}
 }
