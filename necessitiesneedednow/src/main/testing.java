@@ -57,16 +57,16 @@ public class testing {
                 System.out.println("Please enter the store where you would like this purchased from");
                 String store = input.nextLine();
 
-                apiCall.getSpecificItem(itemId, totalAmount);
+                double price = apiCall.getSpecificItem(itemId, totalAmount);
 
-                System.out.println("Please enter the price of the item");
-                while (!input.hasNextDouble()) {
-                    System.out.println("Please enter the price of the item using ONLY digits.");
-                    input.next();
-                }
-                double price = input.nextDouble();
+//                System.out.println("Please enter the price of the item");
+//                while (!input.hasNextDouble()) {
+//                    System.out.println("Please enter the price of the item using ONLY digits.");
+//                    input.next();
+//                }
+//                double price = input.nextDouble();
+//                input.nextLine();
 
-                input.nextLine();
                 System.out.println("Would you like to subscribe to this item? (Enter true/false)");
                 while (!input.hasNextBoolean()) {
                     System.out.println("Please enter ONLY true/false.");

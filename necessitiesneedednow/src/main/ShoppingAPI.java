@@ -58,13 +58,14 @@ public class ShoppingAPI {
 		return result;
 	}
 
-	public static void getSpecificItem(int id, int amount){
+	public static double getSpecificItem(int id, int amount){
 		BufferedReader reader;
 		String line;
 		StringBuffer responseContent = new StringBuffer();
+		double price = 0;
 
 		try {
-			URL url = new URL("https://api.spoonacular.com/food/ingredients/" + id +"/information?amount=1&apiKey=704d3da3d2f84275b3ebcf55e3cece44");
+			URL url = new URL("https://api.spoonacular.com/food/ingredients/" + id +"/information?amount="+ amount +"&apiKey=704d3da3d2f84275b3ebcf55e3cece44");
 			connectionItem = (HttpURLConnection) url.openConnection();
 
 			// Request Setup
@@ -89,8 +90,9 @@ public class ShoppingAPI {
 			}
 
 			System.out.println(responseContent.toString());
-//			parseItem(responseContent.toString());
-
+			price = parseItem(responseContent.toString());
+			price = Math.round(price) / 100.00;
+			System.out.println("$" + price);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -98,6 +100,8 @@ public class ShoppingAPI {
 		} finally {
 			connectionItem.disconnect();
 		}
+
+		return price;
 	}
 
 	public static int getItemId(String name){
@@ -126,10 +130,10 @@ public class ShoppingAPI {
 	// once chosen get price of item
 	}
 
-	public static String parseItem(String responseBody) {
+	public static double parseItem(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
-		int price = obj.getInt("estimatedCost");
-		System.out.println("PRICE: " + price);
-		return null;
+		JSONObject costList = (JSONObject) obj.get("estimatedCost");
+		double cost = (double) costList.get("value");
+		return cost;
 	}
 }
