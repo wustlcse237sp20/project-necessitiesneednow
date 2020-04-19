@@ -22,7 +22,11 @@ public class CSVReadUtils {
             BufferedReader br = new BufferedReader(new FileReader(csv));
             while ((line = br.readLine()) != null) {
                 String[] shoppingListInfo = line.split(delim);
-                loadedList.addItem(shoppingListInfo[0], stringToInt(shoppingListInfo[1]), shoppingListInfo[2],stringToDouble(shoppingListInfo[3]),stringToBoolean(shoppingListInfo[4]));
+                Item loadedItem = new Item(shoppingListInfo[0], stringToInt(shoppingListInfo[1]), stringToDouble(shoppingListInfo[2]),stringToBoolean(shoppingListInfo[3]));
+                int loadedQuantity = stringToInt(shoppingListInfo[4]);
+                String loadedLocation = shoppingListInfo[5];
+                boolean loadedSub = stringToBoolean(shoppingListInfo[6]);
+                loadedList.addItem(loadedItem,  loadedQuantity, loadedLocation, loadedSub);
             }
         }
         catch (IOException e) {
@@ -30,6 +34,7 @@ public class CSVReadUtils {
         }
         return loadedList;
     }
+
 
 
     private double stringToDouble(String myString){

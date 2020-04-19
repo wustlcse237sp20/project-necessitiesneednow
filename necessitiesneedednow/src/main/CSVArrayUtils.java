@@ -3,14 +3,24 @@ import java.util.Set;
 
 public class CSVArrayUtils {
 
-    public String[] itemsToStringArray(Set<String> items){
+    public String[] itemNamesToStringArray(Set<Item> items){
         int index = 0;
         String[] result = new String[items.size()];
-        for (String item: items) {
-            result[index++] = item;
+        for (Item item: items) {
+            result[index++] = item.getProductName();
         }
         return result;
     }
+
+    public Integer[] isbnCodeToIntArray(Set<Item> items){
+        int index = 0;
+        Integer[] result = new Integer[items.size()];
+        for (Item item: items) {
+            result[index++] =  item.getIsbnCode();
+        }
+        return result;
+    }
+
 
     public String[] LocationsToStringArray(Collection<String> locations){
         int index = 0;
@@ -32,11 +42,20 @@ public class CSVArrayUtils {
 
 
 
-    public Double[] pricesToDoubleArray(Collection<Double> prices){
+    public Double[] pricesToDoubleArray(Set<Item> items){
         int index = 0;
-        Double[] result = new Double[prices.size()];
-        for (Double price: prices) {
-            result[index++] = price;
+        Double[] result = new Double[items.size()];
+        for (Item item: items) {
+            result[index++] = item.getPrice();
+        }
+        return result;
+    }
+
+    public Boolean[] isPerishableToBoolArray(Set<Item> items){
+        int index = 0;
+        Boolean[] result = new Boolean[items.size()];
+        for (Item item: items) {
+            result[index++] = item.isPerishable();
         }
         return result;
     }

@@ -26,7 +26,8 @@ class CSVUtilsTest {
 
     @Test
     void shoppingCartToStringArray(){
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
+        Item apple = new Item("Apple", 2, 1.5, true);
+        listForTesting.addItem(apple, 3, "Apple Store", true);
         ArrayList<String[]> result = csvUtils.shoppingCartToStringArray(listForTesting);
         ArrayList<String[]> expected = new ArrayList<String[]>();
         int three = 3;
@@ -37,20 +38,13 @@ class CSVUtilsTest {
         Assert.assertEquals(expected.get(0), result.get(0));
     }
 
-    @Test
-    void createTestCSV() throws IOException {
-        csvUtils.setFilePath("E:\\NEEDNESSNOW");
-        csvUtils.setFileName("test.csv");
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        csvUtils.createTestCSV(csvUtils.shoppingCartToStringArray(listForTesting));
-    }
-
 
     @Test
     void createCSV() throws IOException {
         csvUtils.setFilePath("E:\\NEEDNESSNOW");
         csvUtils.setFileName("date.csv");
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
+        Item apple = new Item("Apple", 2, 1.5, true);
+        listForTesting.addItem(apple, 3, "Apple Store", true);
         boolean returned = csvUtils.createCSV(listForTesting);
         Assert.assertEquals(true, returned);
     }

@@ -1,9 +1,6 @@
 import java.io.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,17 +25,6 @@ public class CSVUtils {
         return filePath;
     }
 
-    public void createTestCSV(ArrayList<String[]> rows) throws IOException {
-        File csv = new File(filePath+ "\\" +fileName);
-        FileWriter writer = new FileWriter(csv);
-        BufferedWriter bufferedWriter = new BufferedWriter(writer);
-        for (String[] row : rows) {
-            bufferedWriter.append(String.join(",",row));
-            bufferedWriter.append("\n");
-            bufferedWriter.flush();
-            bufferedWriter.close();
-        }
-    }
 
     public Boolean createCSV(shoppingList cart) throws IOException {
         File csv = new File(filePath+ "\\" +fileName);
@@ -60,18 +46,30 @@ public class CSVUtils {
         CSVArrayUtils util = new CSVArrayUtils();
         int size = cart.totalAmountOfItem.keySet().size();
         ArrayList<String[]> rows = new ArrayList<String[]>(size);
-        String[] items =  util.itemsToStringArray(cart.totalAmountOfItem.keySet());
+
+        // information stored by the item class
+        Set<Item> items = cart.totalAmountOfItem.keySet();
+        String[] productNames = util.itemNamesToStringArray(items);
+        Double[] productPrices = util.pricesToDoubleArray(items);
+        Integer[] isbnCodes = util.isbnCodeToIntArray(items);
+        Boolean[] perishables = util.isPerishableToBoolArray(items);
+
+        // information stored in the shopping list
         String[] locations = util.LocationsToStringArray(cart.itemToStore.values());
         Integer[] quantities = util.quantityToIntegerArray(cart.totalAmountOfItem.values());
-        Double[] prices = util.pricesToDoubleArray(cart.pricePerTime.values());
         Boolean[] subscriptions = util.subscriptionsToBooleanArray(cart.subscriptions.values());
-        String[] row = new String[5];
+
+        // not storing total price as that can be recalculated quickly
+
+        String[] row = new String[7];
         for(int index = 0; index < size; index++){
-            row[0] = items[index];
-            row[1] = quantities[index].toString();
-            row[2] = locations[index];
-            row[3] = prices[index].toString();
-            row[4] = subscriptions[index].toString();
+            row[0] = productNames[index];
+            row[1] = isbnCodes[index].toString();
+            row[2] = productPrices[index].toString();
+            row[3] = perishables[index].toString();
+            row[4] = quantities[index].toString();
+            row[5] = locations[index];
+            row[6] = subscriptions[index].toString();
             rows.add(row);
         }
         return rows;
@@ -97,15 +95,4 @@ public class CSVUtils {
         }
         return result;
     }
-
-  /* private String formatToCSV(String[] data){
-        StringJoiner joiner = new StringJoiner(",");
-        for (String datum : data) {
-            String s = removeSpecialCharacters(datum);
-            joiner.add(s);
-        }
-        return joiner.toString();
-    }
-*/
-
 }
