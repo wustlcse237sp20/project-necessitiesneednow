@@ -8,10 +8,13 @@ class shoppingListTest {
 
     private shoppingList listForTesting = new shoppingList("2020-03-17");
 
+    Item Apples = new Item("Apples", 1235, 1000.00, false);
+    Item Pears = new Item("Pears", 12345, 30.00, true);
+
     @Test
     void getTotalAmountOfItem() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        listForTesting.addItem(Apples, 3, "Apple Store", false);
+        listForTesting.addItem(Pears, 5, "Kroger", true);
         HashMap actualHashMap = listForTesting.getTotalAmountOfItem();
         HashMap<String, Integer> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple",3);
@@ -21,8 +24,8 @@ class shoppingListTest {
 
     @Test
     void getItemToStore() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        listForTesting.addItem(Apples, 3, "Apple Store", false);
+        listForTesting.addItem(Pears, 5, "Kroger", true);
         HashMap actualHashMap = listForTesting.getItemToStore();
         HashMap<String, String> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple","Apple Store");
@@ -30,21 +33,12 @@ class shoppingListTest {
         Assert.assertEquals(expectedHashMap,actualHashMap);
     }
 
-    @Test
-    void getPricePerTime() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
-        HashMap actualHashMap = listForTesting.getPricePerTime();
-        HashMap<String, Double> expectedHashMap = new HashMap<>();
-        expectedHashMap.put("Apple", 1000.00);
-        expectedHashMap.put("Pears", 30.00);
-        Assert.assertEquals(expectedHashMap,actualHashMap);
-    }
+
 
     @Test
     void getSubscriptions() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        listForTesting.addItem(Apples, 3, "Apple Store", false);
+        listForTesting.addItem(Pears, 5, "Kroger", true);
         HashMap actualHashMap = listForTesting.getSubscriptions();
         HashMap<String, Boolean> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple", true);
@@ -54,8 +48,8 @@ class shoppingListTest {
 
     @Test
     void getItems() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        listForTesting.addItem(Apples, 3, "Apple Store", false);
+        listForTesting.addItem(Pears, 5, "Kroger", true);
         ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("Apple");
@@ -65,7 +59,7 @@ class shoppingListTest {
 
     @Test
     void addItem() {
-        listForTesting.addItem("Fidget Spinner", 1, "Target", 3.00,true);
+
            ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
            ArrayList<String> expectedArrayList = new ArrayList<>();
            expectedArrayList.add("Fidget Spinner");
@@ -75,9 +69,9 @@ class shoppingListTest {
 
     @Test
     void removeItem() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
-        listForTesting.removeItem("Apple");
+        listForTesting.addItem(Apples, 3, "Apple Store", true);
+        listForTesting.addItem(Pears, 5, "Kroger", false);
+        listForTesting.removeItem(Apples);
         ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("Pears");
@@ -86,9 +80,9 @@ class shoppingListTest {
 
     @Test
     void removePartialItem() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
-        listForTesting.removePartialItem("Pears", 4);
+        listForTesting.addItem(Apples, 3, "Apple Store", false);
+        listForTesting.addItem(Pears, 5, "Kroger", true);
+        listForTesting.removePartialItem(Pears, 4);
         HashMap actualHashMap = listForTesting.getTotalAmountOfItem();
         HashMap<String, Integer> expectedHashMap = new HashMap<>();
         expectedHashMap.put("Apple", 3);
@@ -99,8 +93,8 @@ class shoppingListTest {
 
     @Test
     void totalCost() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        listForTesting.addItem(Apples, 3, "Apple Store", false);
+        listForTesting.addItem(Pears, 5, "Kroger", true);
         double actualTotalCost = listForTesting.totalCost();
         double expectedTotalCost = (3*1000.00) + (5*30.00);
         Assert.assertEquals(expectedTotalCost,actualTotalCost, 0.0000);
