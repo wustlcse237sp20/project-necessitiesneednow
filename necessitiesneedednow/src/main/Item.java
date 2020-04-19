@@ -11,4 +11,19 @@ public class Item {
          this.isPerishable = isPerishable;
      }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getIsbnCode() {
+        return isbnCode;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isPerishable() {
+        return isPerishable;
+    }
 }

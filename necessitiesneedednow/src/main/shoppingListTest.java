@@ -56,7 +56,7 @@ class shoppingListTest {
     void getItems() {
         listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
-        ArrayList<String> actualArrayList = listForTesting.getItems();
+        ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("Apple");
         expectedArrayList.add("Pears");
@@ -66,7 +66,7 @@ class shoppingListTest {
     @Test
     void addItem() {
         listForTesting.addItem("Fidget Spinner", 1, "Target", 3.00,true);
-           ArrayList<String> actualArrayList = listForTesting.getItems();
+           ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
            ArrayList<String> expectedArrayList = new ArrayList<>();
            expectedArrayList.add("Fidget Spinner");
            Assert.assertEquals(expectedArrayList,actualArrayList);
@@ -78,7 +78,7 @@ class shoppingListTest {
         listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         listForTesting.removeItem("Apple");
-        ArrayList<String> actualArrayList = listForTesting.getItems();
+        ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
         ArrayList<String> expectedArrayList = new ArrayList<>();
         expectedArrayList.add("Pears");
         Assert.assertEquals(expectedArrayList,actualArrayList);
