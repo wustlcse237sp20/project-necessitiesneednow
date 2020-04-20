@@ -89,7 +89,6 @@ public class ShoppingAPI {
 				reader.close();
 			}
 
-			System.out.println(responseContent.toString());
 			price = parseItem(responseContent.toString());
 			price = Math.round(price) / 100.00;
 			System.out.println("$" + price);
