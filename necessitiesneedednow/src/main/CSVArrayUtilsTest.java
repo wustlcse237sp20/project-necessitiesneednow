@@ -20,8 +20,8 @@ class CSVArrayUtilsTest {
     @Test
     void locationsToStringArray() {
 
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        Item apple = new Item("Apple", 2, 1.5, true);
+        listForTesting.addItem(apple, 3, "Apple Store", true);
         String[] actualItemNames = arrayUtilsForTesting.LocationsToStringArray(listForTesting.itemToStore.values());
         String[] expectedItemNames = {"Apple Store", "Kroger"};
         Assertions.assertEquals(expectedItemNames,actualItemNames);
@@ -30,8 +30,8 @@ class CSVArrayUtilsTest {
 
     @Test
     void quantityToIntegerArray() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        Item apple = new Item("Apple", 2, 1.5, true);
+        listForTesting.addItem(apple, 3, "Apple Store", true);
         Integer[] actualQuantities = arrayUtilsForTesting.quantityToIntegerArray(listForTesting.totalAmountOfItem.values());
         Integer[] expectedQuantities = {3,5};
         Assertions.assertEquals(expectedQuantities,actualQuantities);
@@ -48,8 +48,8 @@ class CSVArrayUtilsTest {
 
     @Test
     void subscriptionsToBooleanArray() {
-        listForTesting.addItem("Apple", 3, "Apple Store", 1000.00, true);
-        listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
+        Item apple = new Item("Apple", 2, 1.5, true);
+        listForTesting.addItem(apple, 3, "Apple Store", true);
         Boolean[] actualSubscriptions = arrayUtilsForTesting.subscriptionsToBooleanArray(listForTesting.subscriptions.values());
         Boolean[] expectedSubscriptions = {true, false};
         Assertions.assertEquals(expectedSubscriptions,actualSubscriptions);

@@ -1,11 +1,10 @@
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class testing {
     public static void main(String[] args) {
 
-    	new GUI();
-    	
         HashMap<User, shoppingList> Users = new HashMap<>();
 
         User firstUser = User.initializeUser();
@@ -20,7 +19,7 @@ public class testing {
 
         while (!nameOfItem.equals("done")) {
             counter++;
-            System.out.println("Your current list is: " + firstUserShoppingList.getAllItemNames());
+            System.out.println("Your current list is: " + firstUserShoppingList.getItems());
             System.out.println("Examples of available food include: milk, eggs, cheese, yogurt, butter, cottage cheese, bread," +
                     "potato chips, cereal, carrots, peppers, lettuce, celery, oranges, strawberries, grapes, blueberries")
             ;
@@ -74,7 +73,6 @@ public class testing {
 
             }
         }
-
 
         System.out.println("Today's shopping list is:" + (firstUserShoppingList.getAllItemNames()));
 

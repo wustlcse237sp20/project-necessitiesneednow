@@ -1,65 +1,70 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class shoppingList {
-    HashMap<Item, Integer> totalAmountOfItem;
-    HashMap<Item, String> itemToStore;
-    HashMap<Item, Boolean> subscriptions;
-    private ArrayList<String> allItemNames;
-    private String date;
-    private Item item;
-    private String itemName;
-    private String itemToRemove;
-    private int numberOfItemsToRemove;
+    HashMap<String, Integer> totalAmountOfItem;
+    HashMap<String, String> itemToStore;
+    HashMap<String, Double> pricePerTime;
+    HashMap<String, Boolean> subscriptions;
+    ArrayList<String> items;
+    String date;
+    String item;
+    int numberOfItemsToRemove;
 
 
     public shoppingList(String date) {
         this.date = date;
         this.totalAmountOfItem = new HashMap<>();
         this.itemToStore = new HashMap<>();
+        this.pricePerTime = new HashMap<>();
         this.subscriptions = new HashMap<>();
-        this.allItemNames = new ArrayList<>();
+        this.items = new ArrayList<>();
 
     }
 
 
-    public HashMap<Item, Integer> getTotalAmountOfItem() {
+    public HashMap<String, Integer> getTotalAmountOfItem() {
         return totalAmountOfItem;
     }
 
-    public HashMap<Item, String> getItemToStore() {
+    public HashMap<String, String> getItemToStore() {
         return itemToStore;
     }
 
+    public HashMap<String, Double> getPricePerTime() {
+        return pricePerTime;
+    }
 
-    public HashMap<Item, Boolean> getSubscriptions() {
+    public HashMap<String, Boolean> getSubscriptions() {
         return subscriptions;
     }
 
-    public ArrayList<String> getAllItemNames() {
-        return allItemNames;
+    public ArrayList<String> getItems() {
+        return items;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void addItem( Item item, int totalAmount, String store, boolean subscribed) {
+    public void addItem(String item, int totalAmount, String store, double price, boolean subscribed) {
         this.totalAmountOfItem.put(item, totalAmount);
         this.itemToStore.put(item, store);
+        this.pricePerTime.put(item, price);
         this.subscriptions.put(item, subscribed);
-        this.allItemNames.add(item.getProductName());
+        this.items.add(item);
 
 
     }
-    public void removeItem(Item item){
+    public void removeItem(String item){
         this.item = item;
-        itemName = item.getProductName();
-        if(this.allItemNames.contains(itemName)){
+        if(this.items.contains(item)){
             this.totalAmountOfItem.remove(item);
             this.itemToStore.remove(item);
+            this.pricePerTime.remove(item);
             this.subscriptions.remove(item);
-            this.allItemNames.remove(itemName);
+            this.items.remove(item);
             System.out.println("Item removed successfully.");
         }
         else{
@@ -68,11 +73,10 @@ public class shoppingList {
         }
     }
 
-    public void removePartialItem(Item item, int numberOfItemsToRemove){
+    public void removePartialItem(String item, int numberOfItemsToRemove){
         this.item = item;
         this.numberOfItemsToRemove = numberOfItemsToRemove;
-        itemName = item.getProductName();
-        if(this.allItemNames.contains(itemName)){
+        if(this.items.contains(item)){
             int oldAmountOfItem = this.totalAmountOfItem.get(item);
             int newAmountOfItem = oldAmountOfItem - numberOfItemsToRemove;
             if(newAmountOfItem < 0){
@@ -84,9 +88,9 @@ public class shoppingList {
     }
     public double totalCost(){
         double price = 0.0;
-        for (Item item: totalAmountOfItem.keySet()) {
+        for (String item: totalAmountOfItem.keySet()) {
             int amountOfItem = totalAmountOfItem.get(item);
-            double priceOfItem = item.getPrice();
+            double priceOfItem = pricePerTime.get(item);
             price += amountOfItem*priceOfItem;
         }
         return price;

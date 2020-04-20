@@ -70,8 +70,8 @@ class shoppingListTest {
 
     @Test
     void addItem() {
-
-           ArrayList<String> actualArrayList = listForTesting.getAllItemNames();
+        listForTesting.addItem("Fidget Spinner", 1, "Target", 3.00,true);
+           ArrayList<String> actualArrayList = listForTesting.getItems();
            ArrayList<String> expectedArrayList = new ArrayList<>();
            expectedArrayList.add("Fidget Spinner");
            Assertions.assertEquals(expectedArrayList,actualArrayList);
