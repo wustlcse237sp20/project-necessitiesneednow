@@ -24,17 +24,18 @@ git clone https://github.com/wustlcse237sp20/project-necessitiesneednow.git
 
 
 ### Setup
-* There is a bash script for you to run that does all of the hard work for you.
+<!-- * There is a bash script for you to run that does all of the hard work for you.
 * In your terminal, change directories to ../project-necessitiesneednow/necessitiesneedednow/src
 * Then, run the bash script 
 ```
 ./script.sh
-```
+``` -->
+Run the project on IntelliJ or your favorite IDE.
   
   
   
 
-## Log
+## Log Iteration 1
 
 We have incorporated the following user stories as of Iteration One (4/6/20):
 
@@ -68,8 +69,17 @@ feature to give the customer a better idea of what they're purchasing: for examp
 
 that are taken from the API so that the user can make better, more informed decisions depending on their preferences.
 
+## Log Iteration 2
+
+* Added an Item class that contains information such as product name, ISBN code, price, and whether or not it is perishable
+* Updated ShoppingListTest to reflect the new Item class
+* Created utilities to read and write to csv files for local storage
+* Updated existing utilities to use the new Item class
+* Additional type and data structure conversions were also implemented
+* Connected to ingredients API to retrieve information about ingredients
+* Updated testing.java to connect with API
   
-## Next Iteration
+## Next for Iteration 2
 
 For our next iteration of NecessitiesNeededNow we hope to have the following user stories completed.
 
@@ -80,3 +90,10 @@ For our next iteration of NecessitiesNeededNow we hope to have the following use
 
 * As a user, There should a way to access items from multiple retailors that match my needs.
 
+## Next for Iteration 3
+
+* Have a simple UI implementation
+
+* Create add or remove Items from a shopping list
+
+* Products could have a small description about them
