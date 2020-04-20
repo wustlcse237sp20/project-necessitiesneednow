@@ -21,6 +21,9 @@ public class ShoppingAPI {
 		StringBuffer responseContent = new StringBuffer();
 		boolean result = false;
 
+		// replace spaces
+		searchEntry = searchEntry.replaceAll(" ", "-");
+
 		try {
 			URL url = new URL("https://api.spoonacular.com/food/ingredients/autocomplete?query=" + searchEntry +  "&metaInformation=true&apiKey=704d3da3d2f84275b3ebcf55e3cece44");
 			connection = (HttpURLConnection) url.openConnection();
@@ -45,7 +48,6 @@ public class ShoppingAPI {
 				}
 				reader.close();
 			}
-
 			result = parseItemList(responseContent.toString());
 
 		} catch (MalformedURLException e) {
