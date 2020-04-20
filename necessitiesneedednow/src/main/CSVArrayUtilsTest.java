@@ -1,5 +1,5 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 class CSVArrayUtilsTest {
 
@@ -14,7 +14,7 @@ class CSVArrayUtilsTest {
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         String[] result = arrayUtilsForTesting.itemsToStringArray(listForTesting.totalAmountOfItem.keySet());
         String[] expectedResult = {"Apple", "Pears"};
-        Assert.assertEquals(expectedResult, result);
+        Assertions.assertEquals(expectedResult, result);
     }
 
     @Test
@@ -24,7 +24,7 @@ class CSVArrayUtilsTest {
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         String[] actualItemNames = arrayUtilsForTesting.LocationsToStringArray(listForTesting.itemToStore.values());
         String[] expectedItemNames = {"Apple Store", "Kroger"};
-        Assert.assertEquals(expectedItemNames,actualItemNames);
+        Assertions.assertEquals(expectedItemNames,actualItemNames);
 
     }
 
@@ -34,7 +34,7 @@ class CSVArrayUtilsTest {
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         Integer[] actualQuantities = arrayUtilsForTesting.quantityToIntegerArray(listForTesting.totalAmountOfItem.values());
         Integer[] expectedQuantities = {3,5};
-        Assert.assertEquals(expectedQuantities,actualQuantities);
+        Assertions.assertEquals(expectedQuantities,actualQuantities);
     }
 
     @Test
@@ -43,7 +43,7 @@ class CSVArrayUtilsTest {
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         Double[] actualPrices = arrayUtilsForTesting.pricesToDoubleArray((listForTesting.pricePerTime.values()));
         Double[] expectedPrices = {1000.00,30.00};
-        Assert.assertEquals(expectedPrices,actualPrices);
+        Assertions.assertEquals(expectedPrices,actualPrices);
     }
 
     @Test
@@ -52,7 +52,7 @@ class CSVArrayUtilsTest {
         listForTesting.addItem("Pears", 5, "Kroger", 30.00, false);
         Boolean[] actualSubscriptions = arrayUtilsForTesting.subscriptionsToBooleanArray(listForTesting.subscriptions.values());
         Boolean[] expectedSubscriptions = {true, false};
-        Assert.assertEquals(expectedSubscriptions,actualSubscriptions);
+        Assertions.assertEquals(expectedSubscriptions,actualSubscriptions);
 
     }
 }
