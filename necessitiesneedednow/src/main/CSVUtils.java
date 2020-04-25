@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 public class CSVUtils {
 
-    String filePath;
-    String fileName;
+    public String filePath;
+    public String fileName;
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
@@ -75,7 +75,7 @@ public class CSVUtils {
         return rows;
     }
 
-    private String removeSpecialCharacters(String data) {
+    public String removeSpecialCharacters(String data) {
         String editedString = data.replaceAll("\\R", " ");
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {
             data = data.replace("\"", "\"\"");
@@ -84,7 +84,7 @@ public class CSVUtils {
         return editedString;
     }
 
-    private ArrayList<String[]> removeAllSpecialCharacters(ArrayList<String[]> array){
+    public ArrayList<String[]> removeAllSpecialCharacters(ArrayList<String[]> array){
         ArrayList<String[]> result = new ArrayList<>(array.size());
         for(int arrayIndex = 0; arrayIndex < array.size(); arrayIndex++){
             for(int stringArrayIndex = 0; stringArrayIndex < array.get(arrayIndex).length; stringArrayIndex++) {

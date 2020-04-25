@@ -24,8 +24,8 @@ import javax.swing.border.EmptyBorder;
 
 public class GUI{
 	
-	private static JPanel panel;
-	private static JFrame frame;
+	public static JPanel panel;
+	public static JFrame frame;
 	
 	public GUI() {
 		

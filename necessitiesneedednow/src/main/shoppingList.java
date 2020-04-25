@@ -5,12 +5,12 @@ public class shoppingList {
     HashMap<Item, Integer> totalAmountOfItem;
     HashMap<Item, String> itemToStore;
     HashMap<Item, Boolean> subscriptions;
-    private ArrayList<String> allItemNames;
-    private String date;
-    private Item item;
-    private String itemName;
-    private String itemToRemove;
-    private int numberOfItemsToRemove;
+    public ArrayList<String> allItemNames;
+    public String date;
+    public Item item;
+    public String itemName;
+    public String itemToRemove;
+    public int numberOfItemsToRemove;
 
 
     public shoppingList(String date) {
