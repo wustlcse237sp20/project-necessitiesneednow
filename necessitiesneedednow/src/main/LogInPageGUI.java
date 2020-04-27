@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.EventListener;
 
 
 public class LogInPageGUI extends JFrame {
@@ -17,7 +18,7 @@ public class LogInPageGUI extends JFrame {
     private JTextField emailTextField;
     private JTextField addressTextField;
     private JLabel SuccessField;
-    private static ArrayList<String> userInfo;
+    private static ArrayList<String> userInfo = new ArrayList<>();
 
     public LogInPageGUI(String title) {
         super(title);
@@ -32,23 +33,30 @@ public class LogInPageGUI extends JFrame {
                 String nameOfUser = nameTextField.getText();
                 String emailOfUser = emailTextField.getText();
                 String addressOfUser = addressTextField.getText();
-                //TODO find a way to store user info from these boxes. uncommenting these lines results in a crud-ton of errors.
-//                userInfo.add(nameOfUser);
-//                userInfo.add(emailOfUser);
-//                userInfo.add(addressOfUser);
+                JOptionPane.showMessageDialog(null, "success!");
+
+                userInfo.add(nameOfUser);
+                userInfo.add(emailOfUser);
+                userInfo.add(addressOfUser);
+                User newUser = new User(nameOfUser,emailOfUser,addressOfUser);
+                // construct a user
                 DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
                 LocalDateTime currentLocalTime = LocalDateTime.now();
-//                userInfo.add(currentLocalTime.toString());
+                userInfo.add(currentLocalTime.toString());
+                // TODO: call CSV stuff here?
                 SuccessField.setText("Thanks, " + nameOfUser + "! We've gone ahead and made you a shoppingList for " + (dtf.format(currentLocalTime) + "!"));
+                System.out.println(getUserInfo().toString());
             }
         });
     }
 
-
+    private static ArrayList<String> getUserInfo() {
+        return userInfo;
+    }
 
     public static void main(String[] args) {
         JFrame frame = new LogInPageGUI("Log In Page for Necessities Needed Now");
         frame.setVisible(true);
-//        System.out.println(userInfo.toString());
+        frame.setLocationRelativeTo(null);
     }
 }
