@@ -1,11 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.EventListener;
+
 
 
 public class LogInPageGUI extends JFrame {
@@ -42,7 +41,7 @@ public class LogInPageGUI extends JFrame {
                 // construct a user
                 DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
                 LocalDateTime currentLocalTime = LocalDateTime.now();
-                userInfo.add(currentLocalTime.toString());
+                userInfo.add(dtf.format(currentLocalTime));
                 // TODO: call CSV stuff here?
                 SuccessField.setText("Thanks, " + nameOfUser + "! We've gone ahead and made you a shoppingList for " + (dtf.format(currentLocalTime) + "!"));
                 System.out.println(getUserInfo().toString());
