@@ -3,16 +3,21 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class testing {
+
     public static void main(String[] args) {
 
-    	JFrame frame = new LogInPageGUI("Log In Page for Necessities Needed Now");
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-
-
+        LogInPageController userInformation = new LogInPageController();
+        new LogInPageGUI("Log In Page for Necessities Needed Now", userInformation); // pass in controller to GUI
+//        frame.setVisible(true);
+//        frame.setLocationRelativeTo(null);
+        //TODO, make sure that we can only reach the lower lines of code **after** we get user input from LogInPageGUI
+        User testing = userInformation.getUser();
+        System.out.println(testing.toString());
         // order goes: date, name, email, address
 
         HashMap<User, shoppingList> Users = new HashMap<>();
+
+
 
         User firstUser = User.initializeUser();
         String currentDate = java.time.LocalDate.now().toString();

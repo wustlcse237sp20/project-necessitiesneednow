@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 
 
 
@@ -18,19 +18,32 @@ public class LogInPageGUI extends JFrame {
     private JTextField addressTextField;
     private JLabel SuccessField;
     private static DefaultListModel<String> userInfo = new DefaultListModel<>();
-    private LogInPageController controller;
+    private LogInPageController controller = new LogInPageController();
+    private User LogInPageGUIUser = new User(null,null,null);
 
-    public LogInPageGUI(String title) {
+    public LogInPageGUI(String title, LogInPageController controller) {
         super(title);
-        controller = new LogInPageController();
-//        JList list = new JList(controller.retrieveUserInfo()); // if you update via the controller, you also update the view. do i need this?
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         this.setContentPane(mainPanel); // set the content that goes into the JFrame (which we named mainPanel)
+        this.setContentPane(mainPanel); // set the content that goes into the JFrame (which we named mainPanel)
         this.pack();
+        this.setVisible(true);
+
+        //TODO how do I have the program wait until the button is pressed
+        //TODO why isn't this working? should the program not pause until the button is pressed?
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // grab the text from the textLabel and store it
+
+                if (LogInPageGUIUser.getName() == null && LogInPageGUIUser.getEmail() == null && LogInPageGUIUser.getAddress() == null ){
+                    // pop up dialogue
+                    LogInPageGUIUser.setName(nameTextField.getText());
+                    LogInPageGUIUser.setEmail(emailTextField.getText());
+                    LogInPageGUIUser.setAddress(addressTextField.getText());
+                }
+
+                // if they make it here, they've logged in successfully
+                // using the controller for states
+
                 String nameOfUser = nameTextField.getText();
                 String emailOfUser = emailTextField.getText();
                 String addressOfUser = addressTextField.getText();
@@ -41,21 +54,11 @@ public class LogInPageGUI extends JFrame {
                 userInfo.add(1,nameOfUser);
                 userInfo.add(2,emailOfUser);
                 userInfo.add(3,addressOfUser);
-                new User(nameOfUser,emailOfUser,addressOfUser);
+                User userForTheController = new User(nameOfUser,emailOfUser,addressOfUser);
+                controller.setUserInfo(userForTheController);
+                // setUser (from the controller)
                 SuccessField.setText("Hello, " + nameOfUser + "!");
-                System.out.println(controller.retrieveUserInfoAsString(userInfo));
             }
         });
-
-    }
-
-//    private static String getUserInfo
-
-
-
-    public static void main(String[] args) {
-        JFrame frame = new LogInPageGUI("Log In Page for Necessities Needed Now");
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
     }
 }
