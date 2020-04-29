@@ -1,11 +1,17 @@
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class testing {
     public static void main(String[] args) {
 
-//    	new GUI();
-    	
+    	JFrame frame = new LogInPageGUI("Log In Page for Necessities Needed Now");
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+
+
+        // order goes: date, name, email, address
+
         HashMap<User, shoppingList> Users = new HashMap<>();
 
         User firstUser = User.initializeUser();
