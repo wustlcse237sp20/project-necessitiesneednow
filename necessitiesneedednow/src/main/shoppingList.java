@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -5,12 +6,13 @@ public class shoppingList {
     HashMap<Item, Integer> totalAmountOfItem;
     HashMap<Item, String> itemToStore;
     HashMap<Item, Boolean> subscriptions;
-    public ArrayList<String> allItemNames;
-    public String date;
+    private ArrayList<String> allItemNames;
+    private String date;
     public Item item;
-    public String itemName;
+    private String itemName;
     public String itemToRemove;
-    public int numberOfItemsToRemove;
+    private int numberOfItemsToRemove;
+    private DefaultListModel<String> allItems;
 
 
     public shoppingList(String date) {
@@ -19,6 +21,7 @@ public class shoppingList {
         this.itemToStore = new HashMap<>();
         this.subscriptions = new HashMap<>();
         this.allItemNames = new ArrayList<>();
+        this.allItems = new DefaultListModel<>();
 
     }
 
@@ -49,6 +52,7 @@ public class shoppingList {
         this.itemToStore.put(item, store);
         this.subscriptions.put(item, subscribed);
         this.allItemNames.add(item.getProductName());
+        this.allItems.addElement(item.getProductName());
 
 
     }
@@ -92,8 +96,13 @@ public class shoppingList {
         return price;
     }
 
+    public DefaultListModel<String> getAllItems() {
+        return this.allItems;
+    }
+
+
+    }
 
 
 
 
-}
