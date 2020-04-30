@@ -62,11 +62,6 @@
           <grid row="4" column="5" row-span="3" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <vspacer id="e01b6">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <vspacer id="fd6d9">
         <constraints>
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -89,11 +84,13 @@
           <text value="Products"/>
         </properties>
       </component>
-      <scrollpane id="f496c">
+      <scrollpane id="f496c" binding="scrollPane">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <verticalScrollBarPolicy value="22"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="e8829" class="javax.swing.JList" binding="searchResults">
@@ -138,6 +135,15 @@
         </constraints>
         <properties>
           <text value="Add to Shopping Cart"/>
+        </properties>
+      </component>
+      <component id="d5632" class="javax.swing.JLabel" binding="errorMessage">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-56284"/>
+          <text value=""/>
         </properties>
       </component>
     </children>
