@@ -36,8 +36,8 @@ public class CSVUtils {
             bufferedWriter.append(String.join(",",row));
             bufferedWriter.append("\n");
             bufferedWriter.flush();
-            bufferedWriter.close();
         }
+        bufferedWriter.close();
         return true;
     }
 
@@ -61,8 +61,10 @@ public class CSVUtils {
 
         // not storing total price as that can be recalculated quickly
 
-        String[] row = new String[7];
+
+        int rowsIndex = 0;
         for(int index = 0; index < size; index++){
+            String[] row = new String[7];
             row[0] = productNames[index];
             row[1] = isbnCodes[index].toString();
             row[2] = productPrices[index].toString();
@@ -70,7 +72,8 @@ public class CSVUtils {
             row[4] = quantities[index].toString();
             row[5] = locations[index];
             row[6] = subscriptions[index].toString();
-            rows.add(row);
+            rows.add(rowsIndex, row);
+            rowsIndex++;
         }
         return rows;
     }
