@@ -11,9 +11,9 @@ import java.util.HashMap;
 
 public class ShoppingAPI {
 
-	private static HttpURLConnection connection;
-	private static HttpURLConnection connectionItem;
-	private static HashMap<String, Integer> searchResults = new HashMap<String, Integer>();
+	public static HttpURLConnection connection;
+	public static HttpURLConnection connectionItem;
+	public static HashMap<String, Integer> searchResults = new HashMap<String, Integer>();
 
 	public static String searchItems(String searchEntry){
 		BufferedReader reader;

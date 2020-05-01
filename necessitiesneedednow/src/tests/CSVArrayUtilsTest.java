@@ -3,8 +3,8 @@ import org.junit.jupiter.api.Test;
 
 class CSVArrayUtilsTest {
 
-    private shoppingList listForTesting = new shoppingList("03-17-00");
-    private CSVArrayUtils arrayUtilsForTesting = new CSVArrayUtils();
+    public shoppingList listForTesting = new shoppingList("03-17-00");
+    public CSVArrayUtils arrayUtilsForTesting = new CSVArrayUtils();
 
 
     @Test

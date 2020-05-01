@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 class CSVUtilsTest {
 
-    private shoppingList listForTesting = new shoppingList("04-13-20");
-    private CSVUtils csvUtils = new CSVUtils();
+    public shoppingList listForTesting = new shoppingList("04-13-20");
+    public CSVUtils csvUtils = new CSVUtils();
 
 
     @Test
