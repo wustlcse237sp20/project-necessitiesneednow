@@ -7,13 +7,18 @@ public class testing {
     public static void main(String[] args) {
 
         LogInPageController userInformation = new LogInPageController();
-        new LogInPageGUI("Log In Page for Necessities Needed Now", userInformation); // pass in controller to GUI
-//        frame.setVisible(true);
-//        frame.setLocationRelativeTo(null);
-        //TODO, make sure that we can only reach the lower lines of code **after** we get user input from LogInPageGUI
-        User testing = userInformation.getUser();
-        System.out.println(testing.toString());
+        LogInPageGUI firstGUIScreen = new LogInPageGUI("Log In Page for Necessities Needed Now", userInformation); // pass in controller to GUI
+
+        //TODO, make sure that we can only reach the lower lines of code **after** we get user input from LogInPageGUI???
+
+        System.out.println("You made it!");
+
+        //TODO, currently returns a NPE due to a lack of info in userInformation. program reaches this line before a user even gets a chance to do anything on firstGUIScreen
+        System.out.println(userInformation.getUser().toString());
         // order goes: date, name, email, address
+        //TODO, my main worry is that once we run our main program and reach our second GUI, will the second GUI be able to call userInformation.getUser() and get anything? or will it always return NPE?
+
+
 
         HashMap<User, shoppingList> Users = new HashMap<>();
 
