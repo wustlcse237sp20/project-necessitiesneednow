@@ -43,6 +43,7 @@ public class ShoppingAPI {
 			while((line = reader.readLine()) != null) {
 				responseContent.append(line);
 			}
+			parseItemList(responseContent.toString());
 			reader.close();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

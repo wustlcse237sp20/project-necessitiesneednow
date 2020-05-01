@@ -20,10 +20,14 @@ public class mainShopping extends JFrame{
     private JLabel heading;
     private JScrollPane scrollPane;
     private JLabel errorMessage;
+    private JCheckBox subscribe;
+    private JButton finishShoppingButton;
     private DefaultListModel listModel = new DefaultListModel();
     private ShoppingAPI api = new ShoppingAPI();
+    private shoppingList list;
 
     public mainShopping(String title){
+        // Initializing GUI
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel.setPreferredSize(new Dimension(440, 450));
@@ -32,24 +36,14 @@ public class mainShopping extends JFrame{
         this.heading.setFont(new Font(heading.getFont().getName(), Font.BOLD, 20));
         searchResults.setModel(listModel);
 
-        // Button Styling
-        addToShoppingCartButton.setBackground(new Color(7, 117, 33));
-        addToShoppingCartButton.setOpaque(true);
-        addToShoppingCartButton.setForeground(Color.WHITE);
-        addToShoppingCartButton.setBorderPainted(false);
+        // Shopping List Setup
+        // TODO: update date here
+        list = new shoppingList("222");
+        JFrame shoppingListFrame = new shoppingListDisplayGUI("Your Current Shopping List", list);
+        shoppingListFrame.setVisible(true);
 
-        // Only allows numeric values (and backspace) to be used
-        quantity.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent ke) {
-                String value = quantity.getText();
-                int l = value.length();
-                if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' || ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                    quantity.setEditable(true);
-                } else {
-                    quantity.setEditable(false);
-                }
-            }
-        });
+        styleButtons();
+        setupQuantityTextField();
 
         // Grouping the radio buttons together so that it's either/or
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -76,9 +70,14 @@ public class mainShopping extends JFrame{
         addToShoppingCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Add items to shopping cart/list
                 if(!searchResults.isSelectionEmpty()){
-
+                    // TODO: Need to updated price functionality
+                    String itemName = searchResults.getSelectedValue().toString();
+                    double itemPrice = getItemPrice(itemName);
+                    System.out.println(itemName + " costs " + itemPrice);
+                    Item item = new Item(itemName, 0, itemPrice, true);
+                    list.addItem(item, 1, "Target", subscribe.isSelected());
+                    clearFields();
                 } else{
                     errorMessage.setText("Please select an item to add to your shopping cart!");
                 }
@@ -86,9 +85,12 @@ public class mainShopping extends JFrame{
         });
     }
 
+    /**
+     * Parses string of apiSearchResults and prints it out on JList of GUI
+     * @param apiSearchResults String of search results
+     */
     public void parseSearchResults(String apiSearchResults){
         JSONArray albums = new JSONArray(apiSearchResults);
-
         if(albums.length() <= 0) listModel.addElement("Your search resulted in 0 results!");
         for(int i = 0; i < albums.length(); i++) {
             JSONObject album = albums.getJSONObject(i);
@@ -98,5 +100,52 @@ public class mainShopping extends JFrame{
         }
         searchResults = new JList(listModel);
         scrollPane.setViewportView(searchResults);
+    }
+
+    public double getItemPrice(String itemName){
+        int id = api.getItemId(itemName);
+        double price = api.getSpecificItem(id, Integer.parseInt(quantity.getText().toString()));
+        return price;
+    }
+
+    /**
+     * Only allows users to enter numerical values (and backspace) in quantity text field
+     */
+    public void setupQuantityTextField(){
+        quantity.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                String value = quantity.getText();
+                int l = value.length();
+                if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' || ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    quantity.setEditable(true);
+                } else {
+                    quantity.setEditable(false);
+                }
+            }
+        });
+    }
+
+    /**
+     * Clears all fields
+     */
+    public void clearFields(){
+        subscribe.setSelected(false);
+        groceriesSearchField.setText("");
+        quantity.setText("");
+        listModel.clear();
+    }
+
+    /**
+     * Styles all the buttons in mainShopping GUI
+     */
+    public void styleButtons(){
+        addToShoppingCartButton.setBackground(new Color(7, 117, 33));
+        addToShoppingCartButton.setOpaque(true);
+        addToShoppingCartButton.setForeground(Color.WHITE);
+        addToShoppingCartButton.setBorderPainted(false);
+        finishShoppingButton.setBackground(new Color(191, 191, 191));
+        finishShoppingButton.setOpaque(true);
+        finishShoppingButton.setForeground(Color.WHITE);
+        finishShoppingButton.setBorderPainted(false);
     }
 }
