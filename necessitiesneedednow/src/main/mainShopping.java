@@ -26,12 +26,17 @@ public class mainShopping extends JFrame{
     public mainShopping(String title){
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainPanel.setPreferredSize(new Dimension(410, 450));
+        mainPanel.setPreferredSize(new Dimension(440, 450));
         this.setContentPane(mainPanel);
         this.pack();
         this.heading.setFont(new Font(heading.getFont().getName(), Font.BOLD, 20));
-
         searchResults.setModel(listModel);
+
+        // Button Styling
+        addToShoppingCartButton.setBackground(new Color(7, 117, 33));
+        addToShoppingCartButton.setOpaque(true);
+        addToShoppingCartButton.setForeground(Color.WHITE);
+        addToShoppingCartButton.setBorderPainted(false);
 
         // Only allows numeric values (and backspace) to be used
         quantity.addKeyListener(new KeyAdapter() {
@@ -59,30 +64,39 @@ public class mainShopping extends JFrame{
                     errorMessage.setText("");
                     String apiSearchResults = api.searchItems(groceriesSearchField.getText());
                     listModel.clear();
+                    parseSearchResults(apiSearchResults);
 
-                    JSONArray albums = new JSONArray(apiSearchResults);
-
-                    if(albums.length() <= 0) listModel.addElement("Your search resulted in 0 results!");
-
-                    for(int i = 0; i < albums.length(); i++) {
-                        JSONObject album = albums.getJSONObject(i);
-                        String name = album.getString("name");
-                        int id = album.getInt("id");
-                        listModel.addElement(name);
-                        System.out.println(name);
-                    }
-
-                    searchResults = new JList(listModel);
-                    scrollPane.setViewportView(searchResults);
                 } else{
                     errorMessage.setText("Please fill out all fields!");
                 }
             }
         });
+
+        // Add to Shopping Cart Button Action
+        addToShoppingCartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Add items to shopping cart/list
+                if(!searchResults.isSelectionEmpty()){
+
+                } else{
+                    errorMessage.setText("Please select an item to add to your shopping cart!");
+                }
+            }
+        });
     }
 
-    public static void main(String[] args){
-        JFrame frame = new mainShopping("NNN Shopping");
-        frame.setVisible(true);
+    public void parseSearchResults(String apiSearchResults){
+        JSONArray albums = new JSONArray(apiSearchResults);
+
+        if(albums.length() <= 0) listModel.addElement("Your search resulted in 0 results!");
+        for(int i = 0; i < albums.length(); i++) {
+            JSONObject album = albums.getJSONObject(i);
+            String name = album.getString("name");
+            int id = album.getInt("id");
+            listModel.addElement(name);
+        }
+        searchResults = new JList(listModel);
+        scrollPane.setViewportView(searchResults);
     }
 }

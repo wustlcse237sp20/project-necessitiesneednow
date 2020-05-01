@@ -21,7 +21,7 @@ public class ShoppingAPI {
 		StringBuffer responseContent = new StringBuffer();
 		boolean result = false;
 
-		// Get rid of spaces in URL
+		// Gets rid of spaces in URL
 		searchEntry = searchEntry.replaceAll(" ", "-");
 
 		try {
@@ -44,8 +44,6 @@ public class ShoppingAPI {
 				responseContent.append(line);
 			}
 			reader.close();
-//			result = parseItemList(responseContent.toString());
-
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -112,7 +110,6 @@ public class ShoppingAPI {
 		} finally {
 			connectionItem.disconnect();
 		}
-
 		return price;
 	}
 
@@ -124,8 +121,6 @@ public class ShoppingAPI {
 			return 0;
 		}
 	}
-
-
 
 	public static double parseItem(String responseBody) {
 		JSONObject obj = new JSONObject(responseBody);
