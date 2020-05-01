@@ -65,7 +65,6 @@ public class ShoppingAPI {
 			String name = album.getString("name");
 			int id = album.getInt("id");
 			searchResults.put(name, id);
-			System.out.println("- " + name);
 		}
 		return true;
 	}
@@ -103,7 +102,6 @@ public class ShoppingAPI {
 
 			price = parseItem(responseContent.toString());
 			price = Math.round(price) / 100.00;
-			System.out.println("$" + price);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

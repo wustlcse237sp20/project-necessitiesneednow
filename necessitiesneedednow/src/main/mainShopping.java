@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
 
 public class mainShopping extends JFrame{
     private JPanel mainPanel;
@@ -76,13 +77,19 @@ public class mainShopping extends JFrame{
                     // TODO: Need to updated price functionality
                     String itemName = searchResults.getSelectedValue().toString();
                     double itemPrice = getItemPrice(itemName);
-                    System.out.println(itemName + " costs " + itemPrice);
                     Item item = new Item(itemName, 0, itemPrice, true);
                     list.addItem(item, 1, "Target", subscribe.isSelected());
                     clearFields();
                 } else{
                     errorMessage.setText("Please select an item to add to your shopping cart!");
                 }
+            }
+        });
+
+        finishShoppingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }
