@@ -22,6 +22,7 @@ public class LogInPageGUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel); // set the content that goes into the JFrame (which we named mainPanel)
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
                 enterButton.addActionListener(new ActionListener() {
                     @Override
@@ -33,8 +34,7 @@ public class LogInPageGUI extends JFrame {
                             String addressOfUser = addressTextField.getText();
                             DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
                             LocalDateTime currentLocalTime = LocalDateTime.now();
-//                            JOptionPane.showMessageDialog(null, "We've gone ahead and made you a shoppingList for today's date, " + (dtf.format(currentLocalTime) + "!"));
-                            System.out.println("AAAA");
+
                             // TODO should I use the controller to get/set the date of the shoppingList or use the LogInPageGUI class' methods
                             controller.setDateOfList(currentLocalTime);
                             userInfo.add(0, dtf.format(currentLocalTime));
@@ -46,7 +46,6 @@ public class LogInPageGUI extends JFrame {
                             controller.setUserInfo(userForTheController);
                             SuccessField.setText("Hello, " + nameOfUser + "!");
                             successfulLogIn = true;
-//                            dispose();
                             dispose();
                             JFrame mainShoppingFrame = new mainShopping("NNN Shopping");
                             mainShoppingFrame.setResizable(false);
@@ -62,7 +61,6 @@ public class LogInPageGUI extends JFrame {
                         }
                     }
                 });
-//            this.setVisible(false);
         }
 
     public boolean isSuccessfulLogIn() { //TODO was planning on using this method somehow, "if (!isSuccessfulLogIn)

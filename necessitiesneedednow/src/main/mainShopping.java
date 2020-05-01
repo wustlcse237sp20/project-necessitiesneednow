@@ -33,6 +33,8 @@ public class mainShopping extends JFrame{
         mainPanel.setPreferredSize(new Dimension(440, 450));
         this.setContentPane(mainPanel);
         this.pack();
+        this.setLocationRelativeTo(null); // Centers Jframe at center of screen
+
         this.heading.setFont(new Font(heading.getFont().getName(), Font.BOLD, 20));
         searchResults.setModel(listModel);
 
