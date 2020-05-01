@@ -3,8 +3,10 @@ import javax.swing.*;
 public class App {
 
     public static void main(String[] args) {
-        JFrame mainShoppingFrame = new mainShopping("NNN Shopping");
-        mainShoppingFrame.setResizable(false);
-        mainShoppingFrame.setVisible(true);
+        LogInPageController userInformation = new LogInPageController();
+        new LogInPageGUI("Log In Page for Necessities Needed Now", userInformation); // pass in controller to GUI
+
+
+
     }
 }
