@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class User {
-
     private String name;
     private String email;
     private String address;
@@ -27,5 +26,14 @@ public class User {
         String addressOfUser = input.nextLine();
 
         return new User(nameOfUser,emailOfUser,addressOfUser);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

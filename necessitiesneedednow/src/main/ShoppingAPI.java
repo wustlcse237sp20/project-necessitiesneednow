@@ -15,17 +15,17 @@ public class ShoppingAPI {
 	public static HttpURLConnection connectionItem;
 	public static HashMap<String, Integer> searchResults = new HashMap<String, Integer>();
 
-	public static boolean searchItems(String searchEntry){
+	public static String searchItems(String searchEntry){
 		BufferedReader reader;
 		String line;
 		StringBuffer responseContent = new StringBuffer();
 		boolean result = false;
 
-		// replace spaces
+		// Gets rid of spaces in URL
 		searchEntry = searchEntry.replaceAll(" ", "-");
 
 		try {
-			URL url = new URL("https://api.spoonacular.com/food/ingredients/autocomplete?query=" + searchEntry +  "&metaInformation=true&apiKey=704d3da3d2f84275b3ebcf55e3cece44");
+			URL url = new URL("https://api.spoonacular.com/food/ingredients/autocomplete?query=" + searchEntry +  "&metaInformation=true&number=20&apiKey=704d3da3d2f84275b3ebcf55e3cece44");
 			connection = (HttpURLConnection) url.openConnection();
 
 			// Request Setup
@@ -37,19 +37,14 @@ public class ShoppingAPI {
 
 			if(status > 299) { // Connection status was NOT successful
 				reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-				while((line = reader.readLine()) != null) {
-					responseContent.append(line);
-				}
-				reader.close();
 			} else { // Connection WAS successful
 				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				while((line = reader.readLine()) != null) {
-					responseContent.append(line);
-				}
-				reader.close();
 			}
-			result = parseItemList(responseContent.toString());
-
+			while((line = reader.readLine()) != null) {
+				responseContent.append(line);
+			}
+			parseItemList(responseContent.toString());
+			reader.close();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -57,7 +52,21 @@ public class ShoppingAPI {
 		} finally {
 			connection.disconnect();
 		}
-		return result;
+		return responseContent.toString();
+	}
+
+	public static boolean parseItemList(String responseBody) {
+		JSONArray albums = new JSONArray(responseBody);
+
+		if(albums.length() <= 0) return false;
+
+		for(int i = 0; i < albums.length(); i++) {
+			JSONObject album = albums.getJSONObject(i);
+			String name = album.getString("name");
+			int id = album.getInt("id");
+			searchResults.put(name, id);
+		}
+		return true;
 	}
 
 	public static double getSpecificItem(int id, int amount){
@@ -93,7 +102,6 @@ public class ShoppingAPI {
 
 			price = parseItem(responseContent.toString());
 			price = Math.round(price) / 100.00;
-			System.out.println("$" + price);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -101,7 +109,6 @@ public class ShoppingAPI {
 		} finally {
 			connectionItem.disconnect();
 		}
-
 		return price;
 	}
 
@@ -112,23 +119,6 @@ public class ShoppingAPI {
 		else{
 			return 0;
 		}
-	}
-
-	public static boolean parseItemList(String responseBody) {
-		JSONArray albums = new JSONArray(responseBody);
-
-		if(albums.length() <= 0) return false;
-
-		for(int i = 0; i < albums.length(); i++) {
-			JSONObject album = albums.getJSONObject(i);
-			String name = album.getString("name");
-			int id = album.getInt("id");
-			searchResults.put(name, id);
-			System.out.println("- " + name);
-		}
-		return true;
-	// list our ingredients --> have them choose from given list or do a different search -->
-	// once chosen get price of item
 	}
 
 	public static double parseItem(String responseBody) {

@@ -3,9 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-
 
 public class LogInPageGUI extends JFrame {
     private JPanel mainPanel;
@@ -17,45 +14,69 @@ public class LogInPageGUI extends JFrame {
     private JTextField emailTextField;
     private JTextField addressTextField;
     private JLabel SuccessField;
-    private static ArrayList<String> userInfo = new ArrayList<>();
+    private static DefaultListModel<String> userInfo = new DefaultListModel<>();
+    private boolean successfulLogIn = false;
 
-    public LogInPageGUI(String title) {
+    public LogInPageGUI(String title, LogInPageController controller) {
         super(title);
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits when u click close ???
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel); // set the content that goes into the JFrame (which we named mainPanel)
         this.pack();
-        enterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // grab the text from the textLabel and store it
-                String nameOfUser = nameTextField.getText();
-                String emailOfUser = emailTextField.getText();
-                String addressOfUser = addressTextField.getText();
-                JOptionPane.showMessageDialog(null, "success!");
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+                enterButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
 
-                userInfo.add(nameOfUser);
-                userInfo.add(emailOfUser);
-                userInfo.add(addressOfUser);
-                User newUser = new User(nameOfUser,emailOfUser,addressOfUser);
-                // construct a user
-                DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
-                LocalDateTime currentLocalTime = LocalDateTime.now();
-                userInfo.add(dtf.format(currentLocalTime));
-                // TODO: call CSV stuff here?
-                SuccessField.setText("Thanks, " + nameOfUser + "! We've gone ahead and made you a shoppingList for " + (dtf.format(currentLocalTime) + "!"));
-                System.out.println(getUserInfo().toString());
-            }
-        });
+                        if (LogInPageController.ensuringUserFieldNotBlank(nameTextField.getText(), emailTextField.getText(), addressTextField.getText())) {
+                            String nameOfUser = nameTextField.getText();
+                            String emailOfUser = emailTextField.getText();
+                            String addressOfUser = addressTextField.getText();
+                            DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
+                            LocalDateTime currentLocalTime = LocalDateTime.now();
+
+                            // TODO should I use the controller to get/set the date of the shoppingList or use the LogInPageGUI class' methods
+                            controller.setDateOfList(currentLocalTime);
+                            userInfo.add(0, dtf.format(currentLocalTime));
+
+                            userInfo.add(1, nameOfUser);
+                            userInfo.add(2, emailOfUser);
+                            userInfo.add(3, addressOfUser);
+                            User userForTheController = new User(nameOfUser, emailOfUser, addressOfUser);
+                            controller.setUserInfo(userForTheController);
+                            SuccessField.setText("Hello, " + nameOfUser + "!");
+                            successfulLogIn = true;
+                            dispose();
+                            JFrame mainShoppingFrame = new mainShopping("NNN Shopping");
+                            mainShoppingFrame.setResizable(false);
+                            mainShoppingFrame.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Invalid Entry! Please Fill Out All Fields. Quitting...");
+                            nameTextField.setText("");
+                            emailTextField.setText("");
+                            addressTextField.setText("");
+                            successfulLogIn = false;
+
+                            System.exit(0);
+                        }
+                    }
+                });
+        }
+
+    public boolean isSuccessfulLogIn() { //TODO was planning on using this method somehow, "if (!isSuccessfulLogIn)
+                                                                                    //TODO { *have the user try again* } else {*let user continue*}
+        return successfulLogIn;
     }
 
-    private static ArrayList<String> getUserInfo() {
+    public static DefaultListModel<String> getUserInfo() {
         return userInfo;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new LogInPageGUI("Log In Page for Necessities Needed Now");
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+    public static String getDateOfShoppingList() {
+        return userInfo.get(0);
+    }
+
+    public void closeFrame() {
+        this.setVisible(false);
     }
 }

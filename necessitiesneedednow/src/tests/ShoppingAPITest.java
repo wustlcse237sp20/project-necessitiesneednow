@@ -18,18 +18,6 @@ class ShoppingAPITest {
     }
 
     @Test
-    void getItemId() {
-        ShoppingAPI.parseItemList("[{name:apples,id:9003}]");
-        assertEquals(9003, ShoppingAPI.getItemId("apples"));
-    }
-
-    @Test
-    void parseItemList() {
-        ShoppingAPI.parseItemList("[{name:apples,id:9003}]");
-        assertTrue(true);
-    }
-
-    @Test
     void parseItem() {
         assertEquals(3.17,ShoppingAPI.parseItem("{estimatedCost: {value:3.17, unit:US Cents}}"));
     }
