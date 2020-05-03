@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class mainShopping extends JFrame{
     private JPanel mainPanel;
@@ -89,6 +90,12 @@ public class mainShopping extends JFrame{
         finishShoppingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                saveShoppingList save = new saveShoppingList(list);
+                try {
+                    save.save();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 System.exit(0);
             }
         });
