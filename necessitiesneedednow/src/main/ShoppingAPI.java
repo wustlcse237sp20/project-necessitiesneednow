@@ -1,4 +1,5 @@
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -49,13 +50,16 @@ public class ShoppingAPI {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			connection.disconnect();
 		}
 		return responseContent.toString();
 	}
 
-	public static boolean parseItemList(String responseBody) {
+	public static boolean parseItemList(String responseBody) throws JSONException {
 		JSONArray albums = new JSONArray(responseBody);
 
 		if(albums.length() <= 0) return false;
@@ -69,7 +73,7 @@ public class ShoppingAPI {
 		return true;
 	}
 
-	public static double getSpecificItem(int id, int amount){
+	public static double getSpecificItem(int id, int amount) throws JSONException{
 		BufferedReader reader;
 		String line;
 		StringBuffer responseContent = new StringBuffer();
@@ -121,7 +125,7 @@ public class ShoppingAPI {
 		}
 	}
 
-	public static double parseItem(String responseBody) {
+	public static double parseItem(String responseBody) throws JSONException {
 		JSONObject obj = new JSONObject(responseBody);
 		JSONObject costList = (JSONObject) obj.get("estimatedCost");
 		double cost = (double) costList.get("value");

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
@@ -24,47 +25,47 @@ public class LogInPageGUI extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-                enterButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+        enterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                        if (LogInPageController.ensuringUserFieldNotBlank(nameTextField.getText(), emailTextField.getText(), addressTextField.getText())) {
-                            String nameOfUser = nameTextField.getText();
-                            String emailOfUser = emailTextField.getText();
-                            String addressOfUser = addressTextField.getText();
-                            DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
-                            LocalDateTime currentLocalTime = LocalDateTime.now();
+                if (LogInPageController.ensuringUserFieldNotBlank(nameTextField.getText(), emailTextField.getText(), addressTextField.getText())) {
+                    String nameOfUser = nameTextField.getText();
+                    String emailOfUser = emailTextField.getText();
+                    String addressOfUser = addressTextField.getText();
+                    DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
+                    LocalDateTime currentLocalTime = LocalDateTime.now();
 
-                            // TODO should I use the controller to get/set the date of the shoppingList or use the LogInPageGUI class' methods
-                            controller.setDateOfList(currentLocalTime);
-                            userInfo.add(0, dtf.format(currentLocalTime));
+                    // TODO should I use the controller to get/set the date of the shoppingList or use the LogInPageGUI class' methods
+                    controller.setDateOfList(currentLocalTime);
+                    userInfo.add(0, dtf.format(currentLocalTime));
 
-                            userInfo.add(1, nameOfUser);
-                            userInfo.add(2, emailOfUser);
-                            userInfo.add(3, addressOfUser);
-                            User userForTheController = new User(nameOfUser, emailOfUser, addressOfUser);
-                            controller.setUserInfo(userForTheController);
-                            SuccessField.setText("Hello, " + nameOfUser + "!");
-                            successfulLogIn = true;
-                            dispose();
-                            JFrame mainShoppingFrame = new mainShopping("NNN Shopping");
-                            mainShoppingFrame.setResizable(false);
-                            mainShoppingFrame.setVisible(true);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Invalid Entry! Please Fill Out All Fields. Quitting...");
-                            nameTextField.setText("");
-                            emailTextField.setText("");
-                            addressTextField.setText("");
-                            successfulLogIn = false;
+                    userInfo.add(1, nameOfUser);
+                    userInfo.add(2, emailOfUser);
+                    userInfo.add(3, addressOfUser);
+                    User userForTheController = new User(nameOfUser, emailOfUser, addressOfUser);
+                    controller.setUserInfo(userForTheController);
+                    SuccessField.setText("Hello, " + nameOfUser + "!");
+                    successfulLogIn = true;
+                    dispose();
+                    JFrame mainShoppingFrame = new mainShopping("NNN Shopping");
+                    mainShoppingFrame.setResizable(false);
+                    mainShoppingFrame.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Entry! Please Fill Out All Fields. Quitting...");
+                    nameTextField.setText("");
+                    emailTextField.setText("");
+                    addressTextField.setText("");
+                    successfulLogIn = false;
 
-                            System.exit(0);
-                        }
-                    }
-                });
-        }
+                    System.exit(0);
+                }
+            }
+        });
+    }
 
     public boolean isSuccessfulLogIn() { //TODO was planning on using this method somehow, "if (!isSuccessfulLogIn)
-                                                                                    //TODO { *have the user try again* } else {*let user continue*}
+        //TODO { *have the user try again* } else {*let user continue*}
         return successfulLogIn;
     }
 
@@ -78,5 +79,92 @@ public class LogInPageGUI extends JFrame {
 
     public void closeFrame() {
         this.setVisible(false);
+    }
+
+    {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
+        $$$setupUI$$$();
+    }
+
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+    private void $$$setupUI$$$() {
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 3, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.setBackground(new Color(-11185071));
+        Username = new JLabel();
+        Username.setBackground(new Color(-2497557));
+        Font UsernameFont = this.$$$getFont$$$(null, -1, 20, Username.getFont());
+        if (UsernameFont != null) Username.setFont(UsernameFont);
+        Username.setForeground(new Color(-16337874));
+        Username.setText("Enter Name (first and last name)");
+        mainPanel.add(Username, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        enterButton = new JButton();
+        enterButton.setText("Submit!");
+        mainPanel.add(enterButton, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Email = new JLabel();
+        Font EmailFont = this.$$$getFont$$$(null, -1, 20, Email.getFont());
+        if (EmailFont != null) Email.setFont(EmailFont);
+        Email.setForeground(new Color(-16337874));
+        Email.setText("Enter Email");
+        mainPanel.add(Email, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        emailTextField = new JTextField();
+        emailTextField.setText("");
+        emailTextField.setToolTipText("Click to Enter Email");
+        mainPanel.add(emailTextField, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        nameTextField = new JTextField();
+        nameTextField.setText("");
+        nameTextField.setToolTipText("Click to Enter Name");
+        mainPanel.add(nameTextField, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        addressTextField = new JTextField();
+        addressTextField.setToolTipText("Click to Enter Address");
+        mainPanel.add(addressTextField, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Address = new JLabel();
+        Font AddressFont = this.$$$getFont$$$(null, -1, 20, Address.getFont());
+        if (AddressFont != null) Address.setFont(AddressFont);
+        Address.setForeground(new Color(-16337874));
+        Address.setText("Enter Address");
+        mainPanel.add(Address, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        SuccessField = new JLabel();
+        Font SuccessFieldFont = this.$$$getFont$$$(null, -1, 20, SuccessField.getFont());
+        if (SuccessFieldFont != null) SuccessField.setFont(SuccessFieldFont);
+        SuccessField.setForeground(new Color(-16337874));
+        SuccessField.setText("");
+        mainPanel.add(SuccessField, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
+        mainPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    public JComponent $$$getRootComponent$$$() {
+        return mainPanel;
     }
 }
