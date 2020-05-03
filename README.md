@@ -97,3 +97,17 @@ For our next iteration of NecessitiesNeededNow we hope to have the following use
 * Create add or remove Items from a shopping list
 
 * Products could have a small description about them
+
+##Log Iteration 3
+* Successfully incorporated a three-screen GUI system that is linked to our API and CSV file management system
+* Can log-in using the GUI.
+* Can add items to one's shoppingList using this GUI, which is visible to the User live-time. 
+* While selecting items, one can pick the amount of a certain item that they want as well.
+* Once someone is finished shopping, they have their shoppingList stored as a .csv file.
+* We were unable to successfully have 100% functionality on an IDE that is not IntelliJ due to the nature of the GUI
+designer that we used. For instance, those that are using Eclipse will find that our program is not completely functional.
+* We were unable to successfully create a functioning bash script for this iteration.
+* Future goals that we would add to this project is to address the previous issues, but also address ways to enhance the
+user experience: adding photos of the products they select and including blurbs about them, for example.
+
+Thank you for using Necessities Needed Now!

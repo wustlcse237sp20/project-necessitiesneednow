@@ -1,8 +1,6 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class CSVUtils {
 
@@ -41,26 +39,21 @@ public class CSVUtils {
         return true;
     }
 
-    /*java doc here for the method below*/
+
     public ArrayList<String[]> shoppingCartToStringArray(shoppingList cart){
         CSVArrayUtils util = new CSVArrayUtils();
         int size = cart.totalAmountOfItem.keySet().size();
         ArrayList<String[]> rows = new ArrayList<String[]>(size);
 
-        // information stored by the item class
         Set<Item> items = cart.totalAmountOfItem.keySet();
         String[] productNames = util.itemNamesToStringArray(items);
         Double[] productPrices = util.pricesToDoubleArray(items);
         Integer[] isbnCodes = util.isbnCodeToIntArray(items);
         Boolean[] perishables = util.isPerishableToBoolArray(items);
 
-        // information stored in the shopping list
         String[] locations = util.LocationsToStringArray(cart.itemToStore.values());
         Integer[] quantities = util.quantityToIntegerArray(cart.totalAmountOfItem.values());
         Boolean[] subscriptions = util.subscriptionsToBooleanArray(cart.subscriptions.values());
-
-        // not storing total price as that can be recalculated quickly
-
 
         int rowsIndex = 0;
         for(int index = 0; index < size; index++){
